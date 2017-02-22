@@ -7,7 +7,7 @@ class Raindrops
 
   def self.convert number
     sounds = SOUNDS.select { |sound, size| number % size == 0 }
-    sounds.any? ? sounds.keys.join : number.to_s
+    sounds.any? ? sounds.keys * '' : number.to_s
   end
 end
 
