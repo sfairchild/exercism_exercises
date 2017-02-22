@@ -11,12 +11,8 @@ class Complement
   }
 
   def self.of_dna dna
-    begin
-      raise ArgumentError unless dna.match(/^[#{dna_values}]+$/)
-      dna.tr(dna_values, rna_values)
-    rescue ArgumentError
-      ''
-    end
+    return '' unless dna.match(/^[#{dna_values}]+$/)
+    dna.tr(dna_values, rna_values)
   end
 
   def self.dna_values
