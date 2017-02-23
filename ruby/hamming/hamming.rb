@@ -3,10 +3,10 @@ module BookKeeping
 end
 
 module Hamming
-  def self.compute strand_one, strand_two
-    raise ArgumentError.new('stands are not equal length') unless strand_one.length == strand_two.length
+  def self.compute strand1, strand2
+    first_strand, second_strand = Strand.new(strand1), Strand.new(strand2)
+    raise InvalidLengthError unless first_strand.same_size? second_strand
 
-    first_strand, second_strand = Strand.new(strand_one), Strand.new(strand_two)
     (first_strand - second_strand).length
   end
 
@@ -17,8 +17,18 @@ module Hamming
       @sequence = sequence.chars
     end
 
+    def same_size? other_strand
+      @sequence.length == other_strand.sequence.length
+    end
+
     def - other_strand
       sequence.zip(other_strand.sequence).reject { |n1, n2| n1 == n2 }
+    end
+  end
+
+  class InvalidLengthError < ArgumentError
+    def message
+      'The two stands are not equal length.'
     end
   end
 end
