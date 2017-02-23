@@ -8,7 +8,7 @@ class Squares
   end
 
   def square_of_sum
-    @square_of_sum ||= @nums.inject(0, &:+) ** 2
+    @square_of_sum ||= @nums.sum ** 2
   end
 
   def sum_of_squares
