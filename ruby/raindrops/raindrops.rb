@@ -6,8 +6,7 @@ class Raindrops
   }
 
   def self.convert number
-    sounds = SOUNDS.select { |sound, size| number % size == 0 }
-    sounds.any? ? sounds.keys * '' : number.to_s
+    SOUNDS.each_with_object('') { |(sound, size), sounds| sounds << sound.to_s if number % size == 0 }
   end
 end
 
