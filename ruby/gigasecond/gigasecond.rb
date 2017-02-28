@@ -1,4 +1,3 @@
-require 'date'
 module BookKeeping
   VERSION = 5
 end
