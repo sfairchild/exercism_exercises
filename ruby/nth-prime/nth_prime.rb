@@ -1,25 +1,26 @@
 class Prime
-  @@primes = [2]
+  @primes = [2, 3]
 
   def self.nth num
     raise ArgumentError.new('Can not get a prime less than 1') if num <= 0
 
-    until @@primes.size >= num
-      next_prime = @@primes[-1] + 1
-      next_prime += 1 until is_prime? next_prime
-      @@primes << next_prime
+    next_prime = @primes[-1] + 2
+    until num < @primes.size
+      @primes << next_prime if prime? next_prime
+      next_prime += 2
     end
 
-    @@primes[num - 1]
+    @primes[num - 1]
   end
 
-  def self.is_prime? number
-    @@primes.include?(number) || !@@primes.any? { |prime|
-      next if prime == 1
+  def self.prime? number
+    sqrt = Math.sqrt number
+    !@primes.any? { |prime|
+      return true if prime > sqrt
       (number % prime).zero?
     }
   end
-  private_class_method :is_prime?
+  private_class_method :prime?
 end
 
 module BookKeeping
