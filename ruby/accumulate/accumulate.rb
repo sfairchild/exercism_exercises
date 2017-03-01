@@ -1,9 +1,10 @@
 class Array
-  def accumulate &func
-    self.each_with_object([]) { |item, result| result << (func === item) }
+  def accumulate
+    return enum_for :accumulate unless block_given?
+    each_with_object([]) { |item, result| result << (Proc.new === item) }
   end
 end
 
 module BookKeeping
-  VERSION = 1
+  VERSION = 2
 end
